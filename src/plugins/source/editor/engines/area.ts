@@ -5,16 +5,17 @@
  */
 
 import { IJodit, ISourceEditor } from '../../../../types';
-import { css } from '../../../../core/helpers';
+// import { css } from '../../../../core/helpers';
 import { Dom } from '../../../../modules';
 import { SourceEditor } from '../sourceEditor';
+import * as constants from '../../../../core/constants';
 
 export class TextAreaEditor extends SourceEditor<HTMLTextAreaElement>
 	implements ISourceEditor {
-	private autosize = this.j.async.debounce(() => {
-		this.instance.style.height = 'auto';
-		this.instance.style.height = this.instance.scrollHeight + 'px';
-	}, this.j.defaultTimeout);
+	// private autosize = this.j.async.debounce(() => {
+	// 	this.instance.style.height = 'auto';
+	// 	this.instance.style.height = this.instance.scrollHeight + 'px';
+	// }, this.j.defaultTimeout);
 
 	init(editor: IJodit): any {
 		this.instance = editor.c.element('textarea', {
@@ -29,20 +30,26 @@ export class TextAreaEditor extends SourceEditor<HTMLTextAreaElement>
 				'mousedown keydown touchstart input',
 				editor.async.debounce(this.toWYSIWYG, editor.defaultTimeout)
 			)
-			.on('setMinHeight.source', (minHeightD: number) => {
-				css(this.instance, 'minHeight', minHeightD);
-			})
-			.on(
-				this.instance,
-				'change keydown mousedown touchstart input',
-				this.autosize
-			)
-			.on('afterSetMode.source', this.autosize)
+			// .on('setMinHeight.source', (minHeightD: number) => {
+			// 	css(this.instance, 'minHeight', minHeightD);
+			// })
+			// .on(
+			// 	this.instance,
+			// 	'change keydown mousedown touchstart input',
+			// 	this.autosize
+			// )
+			// .on('afterSetMode.source', this.autosize)
 			.on(this.instance, 'mousedown focus', (e: Event) => {
 				editor.e.fire(e.type, e);
+			})
+			.on('afterSetMode', () => {
+				editor.container.classList.toggle(
+					'jodit-source__mode_area',
+					editor.getRealMode() == constants.MODE_SOURCE
+				);
 			});
 
-		this.autosize();
+		// this.autosize();
 
 		this.onReady();
 	}

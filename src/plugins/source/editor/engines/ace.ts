@@ -137,27 +137,66 @@ export class AceEditor extends SourceEditor<AceAjax.Editor>
 				this.setValue(this.getValue());
 			}
 
-			const onResize = this.j.async.debounce(() => {
-				if (editor.isInDestruct) {
-					return;
-				}
+			if (editor.getMode() == constants.MODE_SPLIT) {
+				const onResize = this.j.async.debounce(() => {
+					if (editor.isInDestruct) {
+						return;
+					}
 
-				if (editor.o.height !== 'auto') {
-					this.instance.setOption(
-						'maxLines',
-						editor.workplace.offsetHeight /
-							this.instance.renderer.lineHeight
-					);
-				} else {
-					this.instance.setOption('maxLines', Infinity);
-				}
+					if (editor.o.height !== 'auto') {
+						this.instance.setOption(
+							'maxLines',
+							editor.workplace.offsetHeight /
+								this.instance.renderer.lineHeight
+						);
+					} else {
+						this.instance.setOption('maxLines', Infinity);
+					}
 
-				this.instance.resize();
-			}, this.j.defaultTimeout * 2);
+					this.instance.resize();
+				}, this.j.defaultTimeout * 2);
 
-			editor.e.on('afterResize afterSetMode', onResize);
+				editor.e.on('afterResize afterSetMode', onResize);
 
-			onResize();
+				onResize();
+			} else {
+				let lastHeight = 0;
+				const setHeight = () => {
+					let hasChanged = false;
+					let height = editor.workplace.offsetHeight;
+					if (height > 0) {
+						if (lastHeight != height) {
+							hasChanged = true;
+							(<any>(
+								editor.container.querySelector(
+									'.jodit-source__mirror-fake'
+								)
+							)).style.height = height + 'px';
+							// this.instance.resize();
+							lastHeight = height;
+						}
+					}
+					return hasChanged;
+				};
+				editor.e.on('beforeSetMode', () => {
+					if (editor.getRealMode() == constants.MODE_WYSIWYG) {
+						setHeight();
+					}
+				});
+				editor.e.on('afterSetMode', () => {
+					if (editor.getRealMode() == constants.MODE_SOURCE) {
+						this.instance.resize();
+					}
+				});
+				editor.e.on(
+					'afterResize',
+					this.j.async.debounce(() => {
+						if (editor.getRealMode() == constants.MODE_SOURCE) {
+							if (setHeight()) this.instance.resize();
+						}
+					}, 1000)
+				);
+			}
 
 			this.onReady();
 		};

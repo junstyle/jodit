@@ -143,8 +143,18 @@ export function size(editor: IJodit): void {
 			editor.container &&
 			(editor.o.height !== 'auto' || editor.isFullSize)
 		) {
+			let cs = editor.ow.getComputedStyle(editor.container);
+			let borderTopWidth = parseInt(
+					cs.getPropertyValue('border-top-width')
+				),
+				borderBottomWidth = parseInt(
+					cs.getPropertyValue('border-bottom-width')
+				);
 			setHeightWorkPlace(
-				editor.container.offsetHeight - getNotWorkHeight()
+				editor.container.offsetHeight -
+					borderTopWidth -
+					borderBottomWidth -
+					getNotWorkHeight()
 			);
 		}
 	};
