@@ -12,3 +12,5 @@ index.html
 .DS_Store
 .vs
 /dist/
+package-lock.json
+yarn.lock
