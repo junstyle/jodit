@@ -4,9 +4,7 @@
  * Copyright (c) 2013-2020 Valeriy Chupurnov. All rights reserved. https://xdsoft.net
  */
 
-import { IDictionary } from '../types';
-
-export default {
+module.exports = {
 	'Type something': 'Start writing...',
 	pencil: 'Edit'
-} as IDictionary<string>;
+};

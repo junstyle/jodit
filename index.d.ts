@@ -4,6 +4,7 @@
  * Copyright (c) 2013-2020 Valeriy Chupurnov. All rights reserved. https://xdsoft.net
  */
 
+import type { IComponent, Nullable } from './src/types';
 import { Jodit as Super } from './src/jodit';
 
 export * from './src/types';
@@ -14,7 +15,7 @@ declare global {
 	const appVersion: string;
 
 	interface HTMLElement {
-		component?: any;
+		component: Nullable<IComponent>;
 	}
 }
 

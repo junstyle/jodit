@@ -4,9 +4,7 @@
  * Copyright (c) 2013-2020 Valeriy Chupurnov. All rights reserved. https://xdsoft.net
  */
 
-import { IDictionary } from '../types';
-
-export default {
+module.exports = {
 	'Type something': 'הקלד משהו...',
 
 	// About
@@ -241,4 +239,4 @@ export default {
 	'Border radius': 'רדיוס הגבול',
 	'Show all': 'הצג את כל',
 	Apply: 'החל'
-} as IDictionary<string>;
+};

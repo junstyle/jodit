@@ -4,9 +4,7 @@
  * Copyright (c) 2013-2020 Valeriy Chupurnov. All rights reserved. https://xdsoft.net
  */
 
-import { IDictionary } from '../types';
-
-export default {
+module.exports = {
 	'Type something': 'Ecrivez ici',
 	// About
 	'About Jodit': 'A propos de Jodit',
@@ -237,4 +235,4 @@ export default {
 	'Border radius': 'Rayon des frontières',
 	'Show all': 'Afficher tous les',
 	Apply: 'Appliquer'
-} as IDictionary<string>;
+};

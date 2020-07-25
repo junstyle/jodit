@@ -4,9 +4,7 @@
  * Copyright (c) 2013-2020 Valeriy Chupurnov. All rights reserved. https://xdsoft.net
  */
 
-import { IDictionary } from '../types';
-
-export default {
+module.exports = {
 	'Type something': 'Escriba algo...',
 
 	// About
@@ -241,4 +239,4 @@ export default {
 	'Border radius': 'Radio frontera',
 	'Show all': 'Mostrar todos los',
 	Apply: 'Aplicar'
-} as IDictionary<string>;
+};

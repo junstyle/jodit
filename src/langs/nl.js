@@ -4,9 +4,7 @@
  * Copyright (c) 2013-2020 Valeriy Chupurnov. All rights reserved. https://xdsoft.net
  */
 
-import { IDictionary } from '../types';
-
-export default {
+module.exports = {
 	'Type something': 'Begin met typen..',
 
 	// About
@@ -243,4 +241,4 @@ export default {
 	'Border radius': 'Border radius',
 	'Show all': 'Toon alle',
 	Apply: 'Toepassing'
-} as IDictionary<string>;
+};

@@ -4,9 +4,7 @@
  * Copyright (c) 2013-2020 Valeriy Chupurnov. All rights reserved. https://xdsoft.net
  */
 
-import { IDictionary } from '../types';
-
-export default {
+module.exports = {
 	'Type something': 'なにかタイプしてください',
 	// About
 	Advanced: '高度な設定',
@@ -238,4 +236,4 @@ export default {
 	'Border radius': '角の丸み',
 	'Show all': '全て表示',
 	Apply: '適用'
-} as IDictionary<string>;
+};
